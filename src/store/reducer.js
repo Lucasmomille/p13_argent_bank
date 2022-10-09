@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { userLogin, getUserInfos, editUserInfos } from "./action";
 
-// If exist, initialize token from local storage
+// get token from local storage if it's here
 const token = localStorage.getItem("token") ? localStorage.getItem("token") : null;
 
-const initialState = {
+const initState = {
   status: null,
   loading: false,
   userInfo: null,
@@ -14,7 +14,7 @@ const initialState = {
 
 const userSlice = createSlice({
   name: "user",
-  initialState,
+  initState,
   reducers: {
     logout: (state) => {
       localStorage.removeItem("token");
@@ -42,20 +42,6 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = payload.message;
     },
-    // Get User Infos
-    [getUserInfos.pending]: (state) => {
-      state.loading = true;
-    },
-    [getUserInfos.fulfilled]: (state, { payload }) => {
-      state.status = payload.status;
-      state.loading = false;
-      state.userInfo = payload.body;
-    },
-    [getUserInfos.rejected]: (state, { payload }) => {
-      state.status = payload.status;
-      state.loading = false;
-      state.error = payload.message;
-    },
     // Edit User Infos
     [editUserInfos.pending]: (state) => {
       state.loading = true;
@@ -70,6 +56,20 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = payload.message;
     },
+    // User Infos
+    [getUserInfos.pending]: (state) => {
+      state.loading = true;
+    },
+    [getUserInfos.fulfilled]: (state, { payload }) => {
+      state.status = payload.status;
+      state.loading = false;
+      state.userInfo = payload.body;
+    },
+    [getUserInfos.rejected]: (state, { payload }) => {
+      state.status = payload.status;
+      state.loading = false;
+      state.error = payload.message;
+    }
   },
 });
 

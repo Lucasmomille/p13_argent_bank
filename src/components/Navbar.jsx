@@ -1,33 +1,45 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserInfos } from "../store/action";
 
 export default function Navbar() {
+    const { token, userInfo } = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (token) {
+            console.log('in header token', token)
+            dispatch(getUserInfos());
+        }
+    }, [token, dispatch]);
     return (
         <nav className="main-nav">
             <NavLink className="main-nav-logo" to="/">
                 <img
-                className="main-nav-logo-image"
-                src="./img/argentBankLogo.png"
-                alt="Argent Bank Logo"
+                    className="main-nav-logo-image"
+                    src="./img/argentBankLogo.png"
+                    alt="Argent Bank Logo"
                 />
                 <h1 className="sr-only">Argent Bank</h1>
             </NavLink>
-            <div>
-                <NavLink className="main-nav-item" to="/login">
-                    <i className="fa fa-user-circle"></i>
-                    Sign In
-                </NavLink>
-            </div>
-            <div>
+            { userInfo ? (<div>
                 <NavLink className="main-nav-item" to="/user">
                     <i className="fa fa-user-circle"></i>
-                    Tony
+                    {userInfo?.firstName}
                 </NavLink>
                 <NavLink className="main-nav-item" to="/">
                     <i className="fa fa-sign-out"></i>
                     Sign Out
                 </NavLink>
-            </div>
+            </div>): (
+                <div>
+                    <NavLink className="main-nav-item" to="/login">
+                        <i className="fa fa-user-circle"></i>
+                        Sign In
+                    </NavLink>
+                </div>
+            )}
         </nav>
     )
 }

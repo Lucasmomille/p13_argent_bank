@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userLogin } from "../store/action";
+import NavBar from '../components/Navbar'
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -9,6 +10,7 @@ export default function Login() {
     const [hasRemember, setHasRemember] = useState(false);
     const { loading, userInfo, error } = useSelector((state) => state.user);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const userCode = {
         email: email,
@@ -19,9 +21,7 @@ export default function Login() {
         setHasRemember((current) => !current);
     };
 
-    const navigate = useNavigate();
-
-    // If user is authenticate, redirect to profile page
+    // Redirect to profile page
     useEffect(() => {
         if (userInfo) {
             console.log('userInfo', userInfo)
@@ -32,11 +32,11 @@ export default function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const userData = { userCode, hasRemember };
-        console.log('userData', userData)
         dispatch(userLogin(userData));
     };
     return (
         <main className="main bg-dark">
+        <NavBar></NavBar>
             <section className="sign-in-content">
                 <i className="fa fa-user-circle sign-in-icon"></i>
                 <h1>Sign In</h1>
