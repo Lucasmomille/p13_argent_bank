@@ -1,15 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { useSelector, useDispatch } from "react-redux";
+import { editUserInfos } from "../store/action";
 
 export default function User() {
+    const { userInfo } = useSelector((state) => state.user);
+    const dispatch = useDispatch()
+    const { isEdit, setIsEdit } = useState(false);
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+
+    const handleEdit = () => {
+        setIsEdit((edit) => !edit)
+        if (isEdit) {
+            const userData = {
+              firstName: firstName,
+              lastName: lastName,
+            };
+            dispatch(editUserInfos(userData));
+          }
+    }
     return (
         <>
             <Navbar></Navbar>
             <main className="main bg-dark">
                 <div className="header">
-                    <h1>Welcome back<br />Tony Jarvis!</h1>
-                    <button className="edit-button">Edit Name</button>
+                    <h1>Welcome back<br />{userInfo?.firstName + ' ' + userInfo?.lastName}</h1>
+                    <button className="edit-button" onClick={handleEdit}>Edit Name</button>
                 </div>
                 <h2 className="sr-only">Accounts</h2>
                 <section className="account">

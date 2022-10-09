@@ -4,7 +4,7 @@ import { userLogin, getUserInfos, editUserInfos } from "./action";
 // get token from local storage if it's here
 const token = localStorage.getItem("token") ? localStorage.getItem("token") : null;
 
-const initState = {
+const initialState = {
   status: null,
   loading: false,
   userInfo: null,
@@ -14,7 +14,7 @@ const initState = {
 
 const userSlice = createSlice({
   name: "user",
-  initState,
+  initialState,
   reducers: {
     logout: (state) => {
       localStorage.removeItem("token");

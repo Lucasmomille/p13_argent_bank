@@ -9,7 +9,7 @@ export default function Navbar() {
 
     useEffect(() => {
         if (token) {
-            console.log('in header token', token)
+            console.log('in navbar token', token)
             dispatch(getUserInfos());
         }
     }, [token, dispatch]);
@@ -28,7 +28,7 @@ export default function Navbar() {
                     <i className="fa fa-user-circle"></i>
                     {userInfo?.firstName}
                 </NavLink>
-                <NavLink className="main-nav-item" to="/">
+                <NavLink className="main-nav-item" to="/login">
                     <i className="fa fa-sign-out"></i>
                     Sign Out
                 </NavLink>
