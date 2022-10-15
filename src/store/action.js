@@ -1,15 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { API_URL } from "../utils/api";
 
-const request = (method, token) => {
-  return {
-    method: `${method}`,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  }
-}
 export const userLogin = createAsyncThunk("/login", async (user, { rejectWithValue }) => {
   try {
     const requestOptions = {
@@ -22,12 +13,9 @@ export const userLogin = createAsyncThunk("/login", async (user, { rejectWithVal
     const data = await response.json();
 
     if (data.status === 200) {
-      console.log('data login 200', user)
       // If Remember me's input checked, store the user's token
       if (user.hasRemember) {
-        console.log('user remember')
         localStorage.setItem("token", data.body.token);
-        console.log('user remember login', localStorage.getItem("token"))
       }
       return data;
     }

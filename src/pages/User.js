@@ -7,19 +7,20 @@ import { editUserInfos } from "../store/action";
 export default function User() {
     const { userInfo } = useSelector((state) => state.user);
     const dispatch = useDispatch()
-    const { isEdit, setIsEdit } = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
 
     const handleEdit = () => {
-        setIsEdit((edit) => !edit)
-        if (isEdit) {
+        console.log('isEdit', isEdit)
+        setIsEdit(!isEdit)
+        /* if (isEdit) {
             const userData = {
               firstName: firstName,
               lastName: lastName,
             };
             dispatch(editUserInfos(userData));
-          }
+        } */
     }
     return (
         <>
@@ -28,6 +29,14 @@ export default function User() {
                 <div className="header">
                     <h1>Welcome back<br />{userInfo?.firstName + ' ' + userInfo?.lastName}</h1>
                     <button className="edit-button" onClick={handleEdit}>Edit Name</button>
+                    {isEdit ?
+                        (<>
+                            <input type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                            <input type="text" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                        </>) : (
+                            <div>test</div>
+                        )
+                    }
                 </div>
                 <h2 className="sr-only">Accounts</h2>
                 <section className="account">

@@ -8,7 +8,7 @@ export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [hasRemember, setHasRemember] = useState(false);
-    const { loading, userInfo, error } = useSelector((state) => state.user);
+    const { loading, userInfo } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -24,7 +24,6 @@ export default function Login() {
     // Redirect to profile page
     useEffect(() => {
         if (userInfo) {
-            console.log('userInfo', userInfo)
             navigate("/user");
         }
     }, [navigate, userInfo]);

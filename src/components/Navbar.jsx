@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserInfos } from "../store/action";
+import { logout } from '../store/reducer'
 
 export default function Navbar() {
     const { token, userInfo } = useSelector((state) => state.user);
@@ -9,7 +10,6 @@ export default function Navbar() {
 
     useEffect(() => {
         if (token) {
-            console.log('in navbar token', token)
             dispatch(getUserInfos());
         }
     }, [token, dispatch]);
@@ -28,7 +28,7 @@ export default function Navbar() {
                     <i className="fa fa-user-circle"></i>
                     {userInfo?.firstName}
                 </NavLink>
-                <NavLink className="main-nav-item" to="/login">
+                <NavLink className="main-nav-item" to="/login" onClick={() => dispatch(logout())}>
                     <i className="fa fa-sign-out"></i>
                     Sign Out
                 </NavLink>
