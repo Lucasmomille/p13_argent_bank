@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useSelector, useDispatch } from "react-redux";
@@ -12,8 +12,12 @@ export default function User() {
     const [lastName, setLastName] = useState("");
 
     const handleEdit = () => {
-        console.log('isEdit', isEdit)
-        setIsEdit(!isEdit)
+        
+        setIsEdit((status) => !status)
+        const userName = {
+            firstName: firstName,
+            lastName: lastName,
+        }
         /* if (isEdit) {
             const userData = {
               firstName: firstName,
@@ -21,22 +25,42 @@ export default function User() {
             };
             dispatch(editUserInfos(userData));
         } */
+        console.log('isEdit', isEdit)
+        // isEdit ?? dispatch(editUserInfos(userName));
+        if (isEdit) {
+            dispatch(editUserInfos(userName));
+        }
     }
+    const handleCancel = () => {
+        setIsEdit(false);
+        setFirstName(userInfo?.firstName);
+        setLastName(userInfo?.lastName);
+      };
+
+    useEffect(() => {
+        setFirstName(userInfo?.firstName);
+        setLastName(userInfo?.lastName);
+      }, [userInfo]);
     return (
         <>
             <Navbar></Navbar>
             <main className="main bg-dark">
                 <div className="header">
-                    <h1>Welcome back<br />{userInfo?.firstName + ' ' + userInfo?.lastName}</h1>
+                    <h1>Welcome back<br />
+                        {isEdit ?
+                            (<>
+                                <input type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                                <input type="text" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                                <button className="edit-button" onClick={handleEdit}>Save</button>
+                                <button className="edit-button" onClick={handleCancel}>Cancel</button>
+                            </>) : (
+                                <>
+                                    {userInfo?.firstName + ' ' + userInfo?.lastName}
+                                </>
+                            )
+                        }
+                    </h1>
                     <button className="edit-button" onClick={handleEdit}>Edit Name</button>
-                    {isEdit ?
-                        (<>
-                            <input type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                            <input type="text" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                        </>) : (
-                            <div>test</div>
-                        )
-                    }
                 </div>
                 <h2 className="sr-only">Accounts</h2>
                 <section className="account">

@@ -8,7 +8,7 @@ export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [hasRemember, setHasRemember] = useState(false);
-    const { loading, userInfo } = useSelector((state) => state.user);
+    const { userInfo } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -52,7 +52,7 @@ export default function Login() {
                         <input type="checkbox" id="remember-me" value={hasRemember} onChange={toggleRemember}/>
                         <label htmlFor="remember-me">Remember me</label>
                     </div>
-                    <button className="sign-in-button" disabled={loading}>Sign In</button>
+                    <button className="sign-in-button">Sign In</button>
                 </form>
             </section>
         </main>

@@ -19,8 +19,6 @@ export const userLogin = createAsyncThunk("/login", async (user, { rejectWithVal
       }
       return data;
     }
-
-    console.error(data.message);
     return rejectWithValue(data);
   } catch (error) {
     return rejectWithValue(error.message);
@@ -46,7 +44,6 @@ export const getUserInfos = createAsyncThunk("user/getUserInfos", async (param, 
       return data;
     }
 
-    console.log("error", data.message);
     return rejectWithValue(data);
   } catch (error) {
     return rejectWithValue(error.message);
@@ -68,12 +65,12 @@ export const editUserInfos = createAsyncThunk("user/editUserInfos", async (userD
 
     const response = await fetch(API_URL + "user/profile", requestOptions);
     const data = await response.json();
+    console.log('edit', data);
 
     if (data.status === 200) {
       return data;
     }
 
-    console.error(data.message);
     return rejectWithValue(data);
   } catch (error) {
     return rejectWithValue(error.message);
