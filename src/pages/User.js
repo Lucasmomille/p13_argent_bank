@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import './user.css'
 import { useSelector, useDispatch } from "react-redux";
 import { editUserInfos } from "../store/action";
 
@@ -48,12 +49,13 @@ export default function User() {
                 <div className="header">
                     <h1>Welcome back<br />
                         {isEdit ?
-                            (<>
+                            (<div className='user__edit'>
                                 <input type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                                 <input type="text" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                                
                                 <button className="edit-button" onClick={handleEdit}>Save</button>
                                 <button className="edit-button" onClick={handleCancel}>Cancel</button>
-                            </>) : (
+                            </div>) : (
                                 <>
                                     {userInfo?.firstName + ' ' + userInfo?.lastName}
                                 </>

@@ -1,0 +1,26 @@
+.user__edit input {
+    padding: .5rem;
+    font-size: 1rem;
+    color: grey
+}
+
+.user__edit {
+    width: 25%;
+    margin: 0 auto 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    gap: .5rem;
+}
+
+.user__edit .edit-button {
+    width: fit-content;
+    color: #b06cb8;
+    background-color: white;
+    border-color: #b06cb8;
+    border-radius: .25rem;
+}
+
+.user__edit .edit-button:first-of-type {
+    justify-self: end;
+}
