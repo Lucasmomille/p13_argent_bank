@@ -14,20 +14,12 @@ export default function User() {
 
     const handleEdit = () => {
         
-        setIsEdit((status) => !status)
+        setIsEdit(!isEdit)
         const userName = {
             firstName: firstName,
             lastName: lastName,
         }
-        /* if (isEdit) {
-            const userData = {
-              firstName: firstName,
-              lastName: lastName,
-            };
-            dispatch(editUserInfos(userData));
-        } */
-        console.log('isEdit', isEdit)
-        // isEdit ?? dispatch(editUserInfos(userName));
+
         if (isEdit) {
             dispatch(editUserInfos(userName));
         }
@@ -62,7 +54,7 @@ export default function User() {
                             )
                         }
                     </h1>
-                    <button className="edit-button" onClick={handleEdit}>Edit Name</button>
+                    {!isEdit ? <button className="edit-button" onClick={handleEdit}>Edit Name</button> : null}
                 </div>
                 <h2 className="sr-only">Accounts</h2>
                 <section className="account">

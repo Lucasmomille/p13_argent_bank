@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userLogin } from "../store/action";
 import NavBar from '../components/Navbar'
+import Footer from '../components/Footer';
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -35,26 +36,27 @@ export default function Login() {
     };
     return (
         <main className="main bg-dark">
-        <NavBar></NavBar>
-            <section className="sign-in-content">
-                <i className="fa fa-user-circle sign-in-icon"></i>
-                <h1>Sign In</h1>
-                <form onSubmit={handleSubmit}>
-                    <div className="input-wrapper">
-                        <label htmlFor="username">Username</label>
-                        <input type="text" id="username" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                    </div>
-                    <div className="input-wrapper">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                    </div>
-                    <div className="input-remember">
-                        <input type="checkbox" id="remember-me" value={hasRemember} onChange={toggleRemember}/>
-                        <label htmlFor="remember-me">Remember me</label>
-                    </div>
-                    <button className="sign-in-button">Sign In</button>
-                </form>
-            </section>
+            <NavBar></NavBar>
+                <section className="sign-in-content">
+                    <i className="fa fa-user-circle sign-in-icon"></i>
+                    <h1>Sign In</h1>
+                    <form onSubmit={handleSubmit}>
+                        <div className="input-wrapper">
+                            <label htmlFor="username">Username</label>
+                            <input type="text" id="username" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                        </div>
+                        <div className="input-wrapper">
+                            <label htmlFor="password">Password</label>
+                            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                        </div>
+                        <div className="input-remember">
+                            <input type="checkbox" id="remember-me" value={hasRemember} onChange={toggleRemember}/>
+                            <label htmlFor="remember-me">Remember me</label>
+                        </div>
+                        <button className="sign-in-button">Sign In</button>
+                    </form>
+                </section>
+            <Footer></Footer>
         </main>
     )
 }
