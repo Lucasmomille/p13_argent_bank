@@ -1,10 +1,9 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import { useSelector } from "react-redux";
 
 export default function Home() {
-    const { userInfo } = useSelector((state) => state.user);
+
     return (
         <div className="App">
             <Navbar></Navbar>

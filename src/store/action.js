@@ -39,7 +39,7 @@ export const getUserInfos = createAsyncThunk("user/getUserInfos", async (param, 
 
     const response = await fetch(API_URL + "user/profile", requestOptions);
     const data = await response.json();
-    console.log('user remember getuserinfo', localStorage.getItem("token"))
+
     if (data.status === 200) {
       return data;
     }
@@ -65,7 +65,6 @@ export const editUserInfos = createAsyncThunk("user/editUserInfos", async (userD
 
     const response = await fetch(API_URL + "user/profile", requestOptions);
     const data = await response.json();
-    console.log('edit', data);
 
     if (data.status === 200) {
       return data;

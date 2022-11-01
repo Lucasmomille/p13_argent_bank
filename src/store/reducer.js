@@ -18,7 +18,7 @@ const userSlice = createSlice({
       localStorage.removeItem("token");
       state.userInfo = null;
       state.token = null;
-      state.error = null; // check
+      state.error = null;
     },
   },
   extraReducers: {
